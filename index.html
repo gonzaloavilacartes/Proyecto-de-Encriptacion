@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de texto</title>
+    <meta name="description" content="Protege tus mensajes con este encriptador de texto.">
+    <meta name="keywords" content="Encriptador de texto para proteger tus mensajes">
+    <link rel="icon" href="img/Logo-icono.ico">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="script.js" defer></script>
+</head>
+<style>
+    body {
+        background-color: #f3f5fc;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+
+    .estrella {
+        font-family: inherit;
+        font-weight: 500;
+        min-height: 40px;
+        color: #0a3871;
+    }
+
+    .estrella p:hover {
+        color: #082b55;
+    }
+
+    #texto-encriptado,
+    .campo-mensaje {
+        max-height: 240px;
+        color: #0a3871;
+        outline: none;
+        border: none;
+        resize: none;
+    }
+
+    #texto-encriptado::placeholder {
+        color: #0a3871;
+    }
+
+    .info div button:nth-child(1) {
+        color: #fff;
+        background-color: #0a3871;
+        border: 1px solid #0a3871;
+    }
+
+    .info div button:nth-child(1):hover {
+        background-color: #082b55;
+    }
+
+    .info div button:nth-child(2) {
+        color: #0a3871;
+        background: transparent;
+        border: 1px solid #0a3871;
+    }
+
+    .info div button:nth-child(2):hover {
+        background-color: #d8dfe8;
+    }
+
+    .info>span {
+        display: flex;
+        align-items: center;
+    }
+
+    span>p {
+        color: #495057;
+        font-size: 12px;
+    }
+
+    .info>span>img {
+        height: 20px;
+    }
+
+    aside {
+        box-shadow: 7px 8px 20px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    aside .campo-mensaje {
+        display: none;
+    }
+
+    aside #copiar {
+        display: none;
+    }
+
+    aside img {
+        display: none;
+    }
+
+    aside button {
+        color: #0a3871;
+        background: transparent;
+        border: 1px solid #0a3871;
+    }
+
+    aside button:hover {
+        background-color: #d8dfe8;
+    }
+
+    footer {
+        height: 60px;
+        background-color: #082b55;
+        gap: 20px;
+    }
+
+    footer a {
+        color: #f3f5fc;
+        text-decoration: none;
+        transition: all .3s ease;
+    }
+
+    footer a:hover {
+        color: #d8dfe8;
+        transform: scale(1.2);
+    }
+
+    @media (min-width: 0px) {
+
+        main {
+            flex-grow: 1;
+        }
+
+        #texto-encriptado,
+        .campo-mensaje {
+            min-height: 18vh;
+        }
+
+        .estrella p {
+            font-size: 12px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        main>section {
+            height: 55 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #texto-encriptado {
+            min-height: 350px;
+        }
+
+        .campo-mensaje {
+            min-height: 200px;
+        }
+
+        .estrella p {
+            font-size: 14px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+
+        main>section {
+            height: 700px;
+        }
+
+        #texto-encriptado,
+        .campo-mensaje {
+            min-height: 600px;
+        }
+
+        aside {
+            top: -30px;
+            position: relative;
+            min-height: 730px;
+            min-width: 432px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        aside img {
+            display: flex;
+        }
+
+        .estrella p {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<body>
+    <div class="estrella container d-flex flex-row gap-4 text-center justify-content-center align-items-center">
+        <p class="m-0">
+            Si te gusto este proyecto, ¡una estrellita en GitHub sería genial!
+        </p>
+        <iframe
+            src="https://ghbtns.com/github-btn.html?user=Marco-Silvera&repo=Proyectos-Alura&type=star&count=true&size=large"
+            frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+    </div>
+    <div class="container col-12 pt-4">
+        <img class="" src="img/Logo.webp" alt="Logo">
+    </div>
+    <main class="container d-flex flex-column align-content-md-around flex-xl-row gap-xl-5 mt-4 px-xl-0">
+        <section class="container encriptador px-0 px-xl-0">
+            <textarea id="texto-encriptado" class="texto-encriptado col-12 col-md-12 bg-transparent fs-2" name="texto"
+                placeholder="Ingrese el texto aqui" autofocus></textarea>
+            <div class="info">
+                <span class="d-flex gap-3">
+                    <img src="img/exclamation-circle.webp" alt="Icono información">
+                    <p id="error" class="detalles my-2 fs-8">
+                        Solo letras minúsculas y sin acentos
+                    </p>
+                </span>
+                <div class="buttons d-flex flex-column flex-md-row gap-4">
+                    <button onclick="btnEncriptar()" class="py-3 border-1 fs-6 rounded-4 py-md-3 w-100">
+                        Encriptar
+                    </button>
+                    <button onclick="btnDesencriptar()" class="py-3 border-1 fs-6 rounded-4 w-100">
+                        Desencriptar
+                    </button>
+                </div>
+            </div>
+        </section>
+        <aside id="resultado" class="bg-white px-5 py-4 mt-5 mb-3 mt-xl-0 mb-xl-0 text-center rounded-5 gap-4">
+            <textarea id="texto-copiado" class="campo-mensaje col-12 col-xl-3 fs-2 w-100" readonly></textarea>
+            <img id="imagen" src="img/Muñeco.webp" alt="Personaje buscando">
+            <h2 id="ningun" class="ningun fs-2 fw-bold">
+                Ningún mensaje fue encontrado
+            </h2>
+            <p class="instruccion fs-6">
+                Ingresa el texto que desees encriptar o desencriptar.
+            </p>
+
+            <button id="copiar" onclick="copy()" class="copiar py-3 border-1 fs-6 rounded-4 w-100 mt-4">
+                Copiar
+            </button>
+        </aside>
+    </main>
+    <footer class="d-flex justify-content-center align-items-center text-light">
+
+
+        <a href="https://open.spotify.com/user/jlak7zvw38wy7hdyh780adsse?si=83d64564b94b4a5b" target="_blank">
+            <i class="fa-brands fa-spotify fa-2xl"></i>
+        </a>
+
+        <a href="https://github.com/gonzaloavilacartes" target="_blank">
+            <i class="fa-brands fa-github fa-2xl"></i>
+        </a>
+        <p class="m-0 fst-italic">
+            Coded by Gonza
+        </p>
+    </footer>
+</body>
+
+</html>
